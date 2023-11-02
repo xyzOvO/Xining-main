@@ -1,0 +1,37 @@
+server:
+  port: 8989
+spring:
+  datasource:
+#    url: jdbc:mysql://101.37.253.187:3306/sg_blog?characterEncoding=utf-8&serverTimezone=UTC
+#    username: sg_blog
+#    password: 123456
+    url: jdbc:mysql://localhost:3306/sg_blog?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+## 设置静态资源的访问路径
+#  mvc:
+#      static-path-pattern: /static/**
+#  web:
+#    resources:
+#      static-locations: classpath:/static/
+#  redis:
+#    host: 101.37.253.187
+mybatis-plus:
+  configuration:
+    # 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
+oss:
+  accessKey: 65nR5ZLqcCvRCnRkX5IjTFrLpWWMljyorzyIeU9r
+  secretKey: MEeDOA6JkYuH0ci39YuMHF6g8PZVpmxRAQl2G9in
+  bucket: xyz-2001
