@@ -1,7 +1,6 @@
 # 西宁野生动物园论坛设计
 
 ## 初始化完成
-
 ~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
