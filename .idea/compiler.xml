@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="xyz66-admin" />
-        <module name="xyz66-blog" />
         <module name="xyz66-framework" />
+        <module name="xyz66-forum" />
       </profile>
     </annotationProcessing>
   </component>
