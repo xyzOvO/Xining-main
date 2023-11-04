@@ -128,11 +128,11 @@
                     <archive>
                         <manifest>
                             <!-- 配置程序运行入口所在的类 -->
-                            <mainClass>com.xyz66.AdminApplication</mainClass>
+                            <mainClass>com.xyz66.XiningAdminApplication</mainClass>
                         </manifest>
                         <manifest>
                             <!-- 配置程序运行入口所在的类 -->
-                            <mainClass>com.xyz66.Xyz66ForumApplication</mainClass>
+                            <mainClass>com.xyz66.XiningForumApplication</mainClass>
                         </manifest>
                     </archive>
                     <!-- 设置 JAR 包输出目录 -->

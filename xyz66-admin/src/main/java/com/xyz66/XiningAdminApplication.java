@@ -9,10 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("com.xyz66.mapper")
-public class AdminApplication {
+public class XiningAdminApplication {
     public static void main(String[] args) {
-
-        SpringApplication.run(AdminApplication.class, args);
+        SpringApplication.run(XiningAdminApplication.class, args);
     }
 }
 

@@ -11,21 +11,27 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfig {
+    public static final String TAG_1 = "文章";
+    public static final String TAG_2 = "?";
+    public static final String TAG_3 = "登录";
+    public static final String TAG_4 = "评论";
+    public static final String TAG_5 = "用户";
+
     @Bean
     public Docket customDocket() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sangeng.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.xyz66.controller"))
                 .build();
     }
 
     private ApiInfo apiInfo() {
-        Contact contact = new Contact("三更草堂", "http://www.sangeng.com", "my@my.com");
+        Contact contact = new Contact("Xyz66", "https://blog.csdn.net/yjj1123456", "2910223554@qq.com");
         return new ApiInfoBuilder()
-                .title("文档标题1")
-                .description("文档描述2")
-                .contact(contact)   // 联系方式
+                .title("西宁野生动物园论坛")
+                .description("你好，世界！西宁野生动物园论坛的接口文档（Swagger）")
+                .contact("18325238013")   // 联系方式
                 .version("1.1.1")  // 版本
                 .build();
     }

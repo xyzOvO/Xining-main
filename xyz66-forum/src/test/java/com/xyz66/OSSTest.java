@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-@SpringBootTest(classes = Xyz66ForumApplication.class)
+@SpringBootTest(classes = XiningForumApplication.class)
 @ConfigurationProperties(prefix = "oss")
 @Component
 public class OSSTest {
