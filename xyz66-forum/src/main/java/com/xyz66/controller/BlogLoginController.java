@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+/**
+ * @author xyz66 Email:2910223554@qq.com
+ */
 @Api(tags = SwaggerConfig.TAG_3)
+@RestController
 public class BlogLoginController {
     @Autowired
     private BlogLoginService blogLoginService;
@@ -31,6 +34,7 @@ public class BlogLoginController {
         }
         return blogLoginService.login(user);
     }
+
     @PostMapping("/logout")
     @ApiOperation(value = "退出登录")
     public ResponseResult logout(){

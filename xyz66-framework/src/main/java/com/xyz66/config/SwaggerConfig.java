@@ -12,10 +12,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SwaggerConfig {
     public static final String TAG_1 = "文章";
-    public static final String TAG_2 = "?";
+    public static final String TAG_2 = "分类";
     public static final String TAG_3 = "登录";
     public static final String TAG_4 = "评论";
     public static final String TAG_5 = "用户";
+    public static final String TAG_6 = "友链";
 
     @Bean
     public Docket customDocket() {

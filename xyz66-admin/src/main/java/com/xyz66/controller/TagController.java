@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author xyz66 Email:2910223554@qq.com
+ */
 @RestController
 @RequestMapping("/content/tag")
 public class TagController {
@@ -21,40 +24,40 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping("/list")
-    public ResponseResult<PageVo> list(Integer pageNum, Integer pageSize, TagListDto tagListDto){
-        return tagService.pageTagList(pageNum,pageSize,tagListDto);
+    public ResponseResult<PageVo> list(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
+        return tagService.pageTagList(pageNum, pageSize, tagListDto);
     }
 
     @PostMapping
-    public ResponseResult add(@RequestBody AddTagDto tagDto){
+    public ResponseResult add(@RequestBody AddTagDto tagDto) {
         Tag tag = BeanCopyUtils.copyBean(tagDto, Tag.class);
         tagService.save(tag);
         return ResponseResult.okResult();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseResult delete(@PathVariable Long id){
+    public ResponseResult delete(@PathVariable Long id) {
         tagService.removeById(id);
         return ResponseResult.okResult();
     }
 
     @PutMapping
-    public ResponseResult edit(@RequestBody EditTagDto tagDto){
-        Tag tag = BeanCopyUtils.copyBean(tagDto,Tag.class);
+    public ResponseResult edit(@RequestBody EditTagDto tagDto) {
+        Tag tag = BeanCopyUtils.copyBean(tagDto, Tag.class);
         tagService.updateById(tag);
         return ResponseResult.okResult();
     }
 
 
     @GetMapping(value = "/{id}")
-    public ResponseResult getInfo(@PathVariable(value = "id")Long id){
+    public ResponseResult getInfo(@PathVariable(value = "id") Long id) {
         Tag tag = tagService.getById(id);
         return ResponseResult.okResult(tag);
     }
 
 
     @GetMapping("/listAllTag")
-    public ResponseResult listAllTag(){
+    public ResponseResult listAllTag() {
         List<TagVo> list = tagService.listAllTag();
         return ResponseResult.okResult(list);
     }

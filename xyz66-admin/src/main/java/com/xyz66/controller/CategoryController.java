@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @Author 三更  B站： https://space.bilibili.com/663528522
+ * @author xyz66 Email:2910223554@qq.com
  */
 @RestController
 @RequestMapping("/content/category")

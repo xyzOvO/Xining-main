@@ -11,12 +11,13 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-//@Api(tags = {SwaggerConfig.TAG_1})
+/**
+ * @author xyz66 Email:2910223554@qq.com
+ */
 @Api(tags = SwaggerConfig.TAG_1)
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
-
     @Autowired
     private ArticleService articleService;
 
@@ -41,7 +42,7 @@ public class ArticleController {
 
     @PutMapping("/updateViewCount/{id}")
     @ApiOperation(value = "更新浏览次数+1")
-    @ApiImplicitParam(name = "id",value = "文章ID")
+    @ApiImplicitParam(name = "id", value = "文章ID")
     public ResponseResult updateViewCount(@PathVariable("id") Long id) {
         return articleService.updateViewCount(id);
     }

@@ -12,33 +12,40 @@ import org.apiguardian.api.API;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@Api(tags = SwaggerConfig.TAG_5)
 @RestController
 @RequestMapping("/user")
-@Api(tags = SwaggerConfig.TAG_5)
 public class UserController {
 
     @Autowired
     private UserService userService;
 
 
-    @GetMapping("/userInfo")
+    /**
+     * 查看当前用户信息
+     *
+     * @return ResponseResult 当前用户信息
+     */
     @ApiOperation(value = "查看当前用户信息")
-    public ResponseResult userInfo(){
+    @GetMapping("/userInfo")
+    public ResponseResult userInfo() {
         return userService.userInfo();
     }
 
-    @PutMapping("/userInfo")
+
     @SystemLog(businessName = "更新用户信息")
     @ApiOperation(value = "更新用户信息")
-    @ApiImplicitParam(name = "user" ,value = "传入一个用户")
-    public ResponseResult updateUserInfo(@RequestBody User user){
+    @ApiImplicitParam(name = "user", value = "传入一个用户")
+    @PutMapping("/userInfo")
+    public ResponseResult updateUserInfo(@RequestBody User user) {
         return userService.updateUserInfo(user);
     }
 
-    @PostMapping("/register")
-    @ApiOperation(value = "用户注册")
-    @ApiImplicitParam(name = "user" ,value = "传入一个用户注册信息")
-    public ResponseResult register(@RequestBody User user){
-        return userService.register(user);
+    @ApiOperation(value = "用户注册") // 用户注册的API操作描述
+    @ApiImplicitParam(name = "user", value = "传入一个用户注册信息") // 用户注册信息参数的描述
+    @PostMapping("/register") // 注册用户的请求路径
+    public ResponseResult register(@RequestBody User user) { // 注册用户的请求方法
+        return userService.register(user); // 调用用户服务的注册方法，并返回注册结果
     }
+
 }

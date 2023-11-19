@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * @author xyz66 Email:2910223554@qq.com
+ */
 @RestController
 public class LoginController {
     @Autowired
@@ -33,8 +36,8 @@ public class LoginController {
 
 
     @PostMapping("/user/login")
-    public ResponseResult login(@RequestBody User user){
-        if(!StringUtils.hasText(user.getUserName())){
+    public ResponseResult login(@RequestBody User user) {
+        if (!StringUtils.hasText(user.getUserName())) {
             //提示 必须要传用户名
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
         }
@@ -42,14 +45,13 @@ public class LoginController {
     }
 
     @PostMapping("/user/logout")
-    public ResponseResult logout(){
+    public ResponseResult logout() {
         return loginService.logout();
     }
 
 
-
     @GetMapping("getInfo")
-    public ResponseResult<AdminUserInfoVo> getInfo(){
+    public ResponseResult<AdminUserInfoVo> getInfo() {
         //获取当前登录的用户
         LoginUser loginUser = SecurityUtils.getLoginUser();
         //根据用户id查询权限信息
@@ -62,13 +64,13 @@ public class LoginController {
         UserInfoVo userInfoVo = BeanCopyUtils.copyBean(user, UserInfoVo.class);
         //封装数据返回
 
-        AdminUserInfoVo adminUserInfoVo = new AdminUserInfoVo(perms,roleKeyList,userInfoVo);
+        AdminUserInfoVo adminUserInfoVo = new AdminUserInfoVo(perms, roleKeyList, userInfoVo);
         return ResponseResult.okResult(adminUserInfoVo);
     }
 
 
     @GetMapping("getRouters")
-    public ResponseResult<RoutersVo> getRouters(){
+    public ResponseResult<RoutersVo> getRouters() {
         Long userId = SecurityUtils.getUserId();
         //查询menu 结果是tree的形式
         List<Menu> menus = menuService.selectRouterMenuTreeByUserId(userId);
