@@ -1,5 +1,6 @@
 package com.xyz66.controller;
 
+import com.xyz66.config.SwaggerConfig;
 import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.entity.LoginUser;
 import com.xyz66.domain.entity.Menu;
@@ -14,6 +15,9 @@ import com.xyz66.service.MenuService;
 import com.xyz66.service.RoleService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.SecurityUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.mockito.stubbing.ValidableAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,7 @@ import java.util.List;
 /**
  * @author xyz66 Email:2910223554@qq.com
  */
+@Api(tags = SwaggerConfig.TAG_3)
 @RestController
 public class LoginController {
     @Autowired
@@ -35,6 +40,7 @@ public class LoginController {
     private RoleService roleService;
 
 
+    @ApiOperation(value = "用户登录")
     @PostMapping("/user/login")
     public ResponseResult login(@RequestBody User user) {
         if (!StringUtils.hasText(user.getUserName())) {
@@ -44,12 +50,14 @@ public class LoginController {
         return loginService.login(user);
     }
 
+    @ApiOperation(value = "用户退出")
     @PostMapping("/user/logout")
     public ResponseResult logout() {
         return loginService.logout();
     }
 
 
+    @ApiOperation(value = "获取用户信息")
     @GetMapping("getInfo")
     public ResponseResult<AdminUserInfoVo> getInfo() {
         //获取当前登录的用户
@@ -69,6 +77,7 @@ public class LoginController {
     }
 
 
+    @ApiOperation(value = "获取路由信息")
     @GetMapping("getRouters")
     public ResponseResult<RoutersVo> getRouters() {
         Long userId = SecurityUtils.getUserId();

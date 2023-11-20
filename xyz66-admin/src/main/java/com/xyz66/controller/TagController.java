@@ -1,5 +1,6 @@
 package com.xyz66.controller;
 
+import com.xyz66.config.SwaggerConfig;
 import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.dto.AddTagDto;
 import com.xyz66.domain.dto.EditTagDto;
@@ -9,6 +10,7 @@ import com.xyz66.domain.vo.PageVo;
 import com.xyz66.domain.vo.TagVo;
 import com.xyz66.service.TagService;
 import com.xyz66.utils.BeanCopyUtils;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +19,7 @@ import java.util.List;
 /**
  * @author xyz66 Email:2910223554@qq.com
  */
+//@Api(tags = "标签")
 @RestController
 @RequestMapping("/content/tag")
 public class TagController {

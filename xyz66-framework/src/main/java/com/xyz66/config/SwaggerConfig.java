@@ -1,8 +1,11 @@
 package com.xyz66.config;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -23,7 +26,12 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.xyz66.controller"))
+                // 扫描所有有注解的api，用这种方式更灵活
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                // 扫描指定包中的swagger注解
+                // .apis(RequestHandlerSelectors.basePackage("com.xyz66.project.tool.swagger"))
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                .paths(PathSelectors.any())
                 .build();
     }
 
@@ -32,7 +40,6 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("西宁野生动物园论坛")
                 .description("你好，世界！西宁野生动物园论坛的接口文档（Swagger）")
-                .contact("18325238013")   // 联系方式
                 .version("1.1.1")  // 版本
                 .build();
     }

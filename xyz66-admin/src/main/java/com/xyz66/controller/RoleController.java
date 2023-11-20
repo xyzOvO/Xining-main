@@ -4,6 +4,7 @@ import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.dto.ChangeRoleStatusDto;
 import com.xyz66.domain.entity.Role;
 import com.xyz66.service.RoleService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * @author xyz66 Email:2910223554@qq.com
  */
+//@Api(tags = "角色")
 @RestController
 @RequestMapping("/system/role")
 public class RoleController {
