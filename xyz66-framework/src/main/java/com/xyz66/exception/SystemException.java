@@ -3,7 +3,9 @@ package com.xyz66.exception;
 import com.xyz66.enums.AppHttpCodeEnum;
 
 /**
+ * 系统异常
  * @Author 三更  B站： https://space.bilibili.com/663528522
+ *
  */
 public class SystemException extends RuntimeException{
 

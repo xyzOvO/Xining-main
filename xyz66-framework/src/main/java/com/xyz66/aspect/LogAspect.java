@@ -20,10 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 public class LogAspect {
 
     @Pointcut("@annotation(com.xyz66.annotation.SystemLog)")
-    public void pt(){
+    public void pt() {
 
     }
 
+
+    /**
+     * 对pt()方法进行环绕通知，并打印日志
+     *
+     * @param joinPoint 被通知的方法的执行点
+     * @return 约环通知方法的返回值
+     * @throws Throwable 可抛出的异常
+     */
     @Around("pt()")
     public Object printLog(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -40,10 +48,12 @@ public class LogAspect {
         return ret;
     }
 
+
     private void handleAfter(Object ret) {
         // 打印出参
         log.info("Response       : {}", JSON.toJSONString(ret));
     }
+
 
     private void handleBefore(ProceedingJoinPoint joinPoint) {
 
@@ -67,9 +77,12 @@ public class LogAspect {
     }
 
     private SystemLog getSystemLog(ProceedingJoinPoint joinPoint) {
+        // 获取方法签名
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        // 获取目标方法上的 SystemLog 注解
         SystemLog systemLog = methodSignature.getMethod().getAnnotation(SystemLog.class);
+        // 返回 SystemLog 注解对象
         return systemLog;
-
     }
+
 }

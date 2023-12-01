@@ -4,7 +4,6 @@ import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.dto.ChangeRoleStatusDto;
 import com.xyz66.domain.entity.Role;
 import com.xyz66.service.RoleService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -13,7 +13,6 @@ import com.xyz66.service.CategoryService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.WebUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

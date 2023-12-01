@@ -1,6 +1,5 @@
 package com.xyz66.controller;
 
-import com.xyz66.config.SwaggerConfig;
 import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.entity.Menu;
 import com.xyz66.domain.vo.MenuTreeVo;
@@ -9,8 +8,6 @@ import com.xyz66.domain.vo.RoleMenuTreeSelectVo;
 import com.xyz66.service.MenuService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.SystemConverter;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

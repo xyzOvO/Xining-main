@@ -17,6 +17,12 @@ public class SystemConverter {
     }
 
 
+    /**
+     * 根据输入的菜单列表，构建一个用于下拉菜单的选择树列表
+     *
+     * @param menus 菜单列表
+     * @return 用于下拉菜单的选择树列表
+     */
     public static List<MenuTreeVo> buildMenuSelectTree(List<Menu> menus) {
         List<MenuTreeVo> MenuTreeVos = menus.stream()
                 .map(m -> new MenuTreeVo(m.getId(), m.getMenuName(), m.getParentId(), null))
@@ -25,8 +31,6 @@ public class SystemConverter {
                 .filter(o -> o.getParentId().equals(0L))
                 .map(o -> o.setChildren(getChildList(MenuTreeVos, o)))
                 .collect(Collectors.toList());
-
-
         return options;
     }
 
