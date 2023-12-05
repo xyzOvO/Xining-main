@@ -1,0 +1,60 @@
+######################################################################  
+# Build Tools  
+  
+# Gradle配置文件，通常用于管理项目的构建过程和依赖  
+.gradle   
+# Gradle构建的输出目录，通常包含编译后的Java类文件、资源文件、测试类文件、测试资源文件等  
+/build/  
+# 这是Gradle Wrapper的jar包，它是一个用于控制不同版本的Gradle的工具  
+!gradle/wrapper/gradle-wrapper.jar  
+  
+# target/目录，它是Maven构建的输出目录，通常包含编译后的类文件、资源文件、测试类文件、测试资源文件等  
+target/  
+# 这是Maven Wrapper的jar包，它是一个用于控制不同版本的Maven的工具  
+!.mvn/wrapper/maven-wrapper.jar  
+  
+######################################################################  
+# IDE（集成开发环境）  
+  
+### STS（Eclipse插件，提供开发Spring应用的工具） ###.apt_generated  
+.classpath  
+.factorypath  
+.project  
+.settings  
+.springBeans  
+  
+### IntelliJ IDEA ###  
+.idea  
+*.iws  
+*.iml  
+*.ipr  
+  
+#JRebel是一个Java应用的热部署插件，它可以让开发者在不重新部署应用的情况下，实时更新代码  
+### JRebel ###  
+rebel.xml  
+  
+# NetBeans是一款Java IDE，它提供了很多开发工具，如代码生成器、单元测试、调试工具、版本控制等  
+### NetBeans ###  
+nbproject/private/  
+build/*  
+nbbuild/  
+dist/  
+nbdist/  
+.nb-gradle/  
+  
+######################################################################  
+# 其它文件和目录  
+# Others  
+  
+# 日志文件  
+*.log  
+# xml临时文件，保存xml文件的版本信息  
+*.xml.versionsBackup  
+# vi或vim编辑器的临时文件  
+*.swp  
+  
+# 忽略编译后的Java类文件、HTML文件、XML文件  
+!*/build/*.class  
+!*/build/*.java  
+!*/build/*.html  
+!*/build/*.xml
