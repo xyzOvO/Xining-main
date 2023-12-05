@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "添加文章dto")
+@ApiModel(description = "添加文章DTO")
 public class AddArticleDto implements Serializable {
 
     @ApiModelProperty(notes = "文章id")

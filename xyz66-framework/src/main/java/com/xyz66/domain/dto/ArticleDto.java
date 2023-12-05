@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "文章dto")
+@ApiModel(description = "文章DTO")
 public class ArticleDto {
 
     @ApiModelProperty(notes = "文章id")

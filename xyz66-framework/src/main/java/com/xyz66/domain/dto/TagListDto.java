@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "标签列表dto")
+@ApiModel(description = "标签列表DTO")
 public class TagListDto {
 
     @ApiModelProperty(notes = "标签名称")

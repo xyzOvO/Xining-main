@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "添加评论dto")
+@ApiModel(description = "添加评论DTO")
 public class AddCommentDto {
     @ApiModelProperty(notes = "评论id")
     private Long id;

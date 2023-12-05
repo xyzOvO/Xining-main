@@ -2,10 +2,12 @@ package com.xyz66.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.xyz66.enums.AppHttpCodeEnum;
+import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@ApiModel(description = "响应体")
 public class ResponseResult<T> implements Serializable {
     private Integer code;
     private String msg;

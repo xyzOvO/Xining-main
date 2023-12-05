@@ -1,5 +1,6 @@
 package com.xyz66.domain.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@ApiModel(description = "管理员用户信息VO")
 public class AdminUserInfoVo {
 
     private List<String> permissions;

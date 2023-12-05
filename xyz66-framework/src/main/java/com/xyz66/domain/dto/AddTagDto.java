@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "添加标签dto")
+@ApiModel(description = "添加标签DTO")
 public class AddTagDto {
     //备注
     @ApiModelProperty(notes = "备注")

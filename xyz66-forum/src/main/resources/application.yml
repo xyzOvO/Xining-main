@@ -1,5 +1,26 @@
+# 开发环境配置
 server:
+  # 端口号
   port: 7777
+  tomcat:
+    # tomcat的URI编码
+    uri-encoding: UTF-8
+    # 连接数满后的排队数，默认为100
+    accept-count: 1000
+    threads:
+      # tomcat最大线程数，默认为200
+      max: 800
+      # Tomcat启动初始化的线程数，默认值10
+      min-spare: 100
+  
+# Swagger配置
+swagger:
+  # 是否开启swagger
+  enabled: true
+  # 请求前缀
+  pathMapping: 
+  
+# spring配置
 spring:
   datasource:
 #    url: jdbc:mysql://101.37.253.187:3306/sg_blog?characterEncoding=utf-8&serverTimezone=Asia/Shanghai
@@ -9,10 +30,14 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+  # 文件上传配置
   servlet:
     multipart:
+      # 单个文件上传
       max-file-size: 2MB
+      # 总上传的文件大小
       max-request-size: 5MB
+    
   # 设置静态资源的访问路径
 #  mvc:
 #    static-path-pattern: /static/**
@@ -33,6 +58,7 @@ mybatis-plus:
       id-type: auto
 
 oss:
+  # TODO：过期了
   accessKey: 65nR5ZLqcCvRCnRkX5IjTFrLpWWMljyorzyIeU9r
   secretKey: MEeDOA6JkYuH0ci39YuMHF6g8PZVpmxRAQl2G9in
   bucket: xyz-2001

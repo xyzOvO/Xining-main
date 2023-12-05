@@ -1,5 +1,6 @@
 package com.xyz66.domain.vo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "文章详情VO")
 public class ArticleDetailVo {
 
     private Long id;

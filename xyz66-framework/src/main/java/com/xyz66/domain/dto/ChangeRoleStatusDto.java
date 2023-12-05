@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "修改角色状态dto")
+@ApiModel(description = "修改角色状态DTO")
 public class ChangeRoleStatusDto {
 
     @ApiModelProperty(notes = "角色id")
