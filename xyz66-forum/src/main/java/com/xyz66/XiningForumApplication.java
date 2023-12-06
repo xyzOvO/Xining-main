@@ -13,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableSwagger2
 public class XiningForumApplication {
+    // 论坛前台
     public static void main(String[] args) {
         SpringApplication.run(XiningForumApplication.class,args);
     }

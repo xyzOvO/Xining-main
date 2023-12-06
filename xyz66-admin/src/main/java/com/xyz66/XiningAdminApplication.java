@@ -14,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableSwagger2
 public class XiningAdminApplication {
+    // 论坛后台管理系统
     public static void main(String[] args) {
         SpringApplication.run(XiningAdminApplication.class, args);
     }

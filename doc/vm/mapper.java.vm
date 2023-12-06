@@ -1,0 +1,45 @@
+## dao层，数据持久层
+##导入宏定义
+$!{define.vm}
+
+##设置表后缀（宏定义）
+#setTableSuffix("Mapper")
+
+##保存文件（宏定义）
+#save("/mapper", "Mapper.java")
+
+##包路径（宏定义）
+#setPackageSuffix("mapper")
+
+import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import $!{tableInfo.savePackageName}.domain.entity.$!tableInfo.name;
+import org.apache.ibatis.annotations.Mapper;
+
+##表注释（宏定义）
+#tableComment("表数据库访问层")
+@Mapper
+public interface $!{tableName} extends BaseMapper<$!tableInfo.name> {
+
+
+        /**
+         * 批量新增数据（MyBatis原生foreach方法）
+         *
+         * @param entities List<Article> 实例对象列表
+         * @return 影响行数
+         */
+        int insertBatch(@Param("entities") List<Article> entities);
+
+        /**
+         * 批量新增或按主键更新数据（MyBatis原生foreach方法）
+         *
+         * @param entities List<Article> 实例对象列表
+         * @return 影响行数
+         * @throws org.springframework.jdbc.BadSqlGrammarException 入参是空List的时候会抛SQL语句错误的异常，请自行校验入参
+         */
+        int insertOrUpdateBatch(@Param("entities") List<Article> entities);
+
+        }
+

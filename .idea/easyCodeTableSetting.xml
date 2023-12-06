@@ -153,11 +153,11 @@
                 </list>
               </option>
               <option name="name" value="SgArticle" />
-              <option name="preName" value="sg" />
+              <option name="preName" value="sg_" />
               <option name="saveModelName" value="xyz66-forum" />
               <option name="savePackageName" value="com" />
               <option name="savePath" value="./xyz66-forum/src/main/java/com" />
-              <option name="templateGroupName" value="MybatisPlus" />
+              <option name="templateGroupName" value="MybatisPlus-cs" />
             </TableInfoDTO>
           </value>
         </entry>

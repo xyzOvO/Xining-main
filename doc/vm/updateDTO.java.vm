@@ -1,0 +1,47 @@
+## updateDTO类
+##导入宏定义
+$!{define.vm}
+
+##保存文件（宏定义）
+#save("/domain/dto", "UpdateDTO.java")
+
+##包路径（宏定义）
+#setPackageSuffix("domain.dto")
+
+##自动导入包（全局变量）
+$!autoImport
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
+import java.util.Date;
+
+
+##表注释（宏定义）
+#tableComment("-UpdateDTO")
+@TableName("$!{tableInfo.obj.name}")
+public class $!{tableInfo.name}UpdateDTO implements Serializable {
+    #foreach($column in $tableInfo.fullColumn)
+        #if(${column.comment})
+            /**
+             * ${column.comment}
+             */
+        #end
+        ## 测试数据校验，VM模板好像不行##        #if(${column.obj} || ${column.type} == "VARCHAR")${"\n"}#end#if($column.obj)#if($column.type == "VARCHAR")@NotBlank(message="[${column.comment}]不能为空")#else@NotNull(message="[${column.comment}]不能为空")#end#end#if($column.type == "VARCHAR")#if($column)${"\n"}#end@Size(max = ${column.length}, message = "[${column.comment}]长度不能超过${column.length}")#end
+        #if(${column.comment})
+        @ApiModelProperty("${column.comment}")
+        #end
+    private $!{tool.getClsNameByFullName($column.type)} $!{column.name};
+    
+    #end
+
+    #foreach($column in $tableInfo.fullColumn)
+        #getSetMethod($column)
+    #end
+
+    #foreach($column in $tableInfo.pkColumn)
+        #break
+    #end
+
+}
+
