@@ -24,7 +24,6 @@ public class ArticleController {
     @GetMapping("/hotArticleList")
     @ApiOperation(value = "获取热门文章", notes = "获取热门文章")
     public ResponseResult hotArticleList() {
-
         ResponseResult result = articleService.hotArticleList();
         return result;
     }

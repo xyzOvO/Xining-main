@@ -29,15 +29,20 @@ public class BlogLoginServiceImpl implements BlogLoginService {
 
     @Override
     public ResponseResult login(User user) {
+        // 获取用户输入的SpringSecurity的身份认证信息（用户、密码）
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
+        // 获取认证的Authentication对象
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
-        //判断是否认证通过
+        //判断是否认证通过，没有该用户抛出异常
         if(Objects.isNull(authenticate)){
             throw new RuntimeException("用户名或密码错误");
         }
         //获取userid 生成token
+        // Authentication对象中包含了用户信息,通过.getPrincipal()获取用户信息,强转成登录用户类
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
+        // 获取用户id
         String userId = loginUser.getUser().getId().toString();
+        // 根据用户id生成token，jwt
         String jwt = JwtUtil.createJWT(userId);
         //把用户信息存入redis
         redisCache.setCacheObject("bloglogin:"+userId,loginUser);
@@ -52,6 +57,7 @@ public class BlogLoginServiceImpl implements BlogLoginService {
     @Override
     public ResponseResult logout() {
         //获取token 解析获取userid
+        // 获取当前登录用户
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         //获取userid

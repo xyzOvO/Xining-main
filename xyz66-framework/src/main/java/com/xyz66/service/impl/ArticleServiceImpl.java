@@ -113,7 +113,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public ResponseResult getArticleDetail(Long id) {
         //根据id查询文章
         Article article = getById(id);
-        //从redis中获取viewCount
+        //从redis中获取viewCount(浏览量)
         Integer viewCount = redisCache.getCacheMapValue("article:viewCount", id.toString());
         article.setViewCount(viewCount.longValue());
         //转换成VO

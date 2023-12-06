@@ -9,6 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * 这是登录用户实体类
+ * 基于spring security框架
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
