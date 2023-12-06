@@ -5,6 +5,7 @@ import com.xyz66.constants.SystemConstants;
 import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.dto.AddCommentDto;
 import com.xyz66.domain.entity.Comment;
+import com.xyz66.enums.AppHttpCodeEnum;
 import com.xyz66.service.CommentService;
 import com.xyz66.utils.BeanCopyUtils;
 import io.swagger.annotations.Api;
@@ -54,6 +55,10 @@ public class CommentController {
     @ApiImplicitParam(name = "addCommentDto", value = "评论json")
     @PostMapping
     public ResponseResult addComment(@RequestBody AddCommentDto addCommentDto) {
+        // 检查是否登录
+        if (addCommentDto.getCreateBy() == null) {
+            return ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
+        }
         Comment comment = BeanCopyUtils.copyBean(addCommentDto, Comment.class);
         return commentService.addComment(comment);
     }
