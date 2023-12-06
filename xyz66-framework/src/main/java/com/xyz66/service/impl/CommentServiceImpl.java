@@ -32,16 +32,24 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Autowired
     private UserService userService;
 
+    /**
+     * 查询评论列表，树形结构
+     * @param commentType 评论类型（0代表文章评论，1代表友链评论）
+     * @param articleId 文章id
+     * @param pageNum 页号
+     * @param pageSize 每页大小
+     * @return
+     */
     @Override
     public ResponseResult commentList(String commentType, Long articleId, Integer pageNum, Integer pageSize) {
         //查询对应文章的根评论
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
-        //对articleId进行判断
+        //对articleId文章ID进行判断
         queryWrapper.eq(SystemConstants.ARTICLE_COMMENT.equals(commentType),Comment::getArticleId,articleId);
         //根评论 rootId为-1
         queryWrapper.eq(Comment::getRootId,-1);
 
-        //评论类型
+        //评论类型，0代表文章评论，1代表友链评论
         queryWrapper.eq(Comment::getType,commentType);
 
         //分页查询
@@ -74,13 +82,15 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     /**
      * 根据根评论的id查询所对应的子评论的集合
      * @param id 根评论的id
-     * @return
+     * @return 子评论的集合
      */
     private List<CommentVo> getChildren(Long id) {
-
+        // 查询根评论的子评论
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Comment::getRootId,id);
+        // 根评论的子评论按时间升序排列
         queryWrapper.orderByAsc(Comment::getCreateTime);
+        // Mybatis-plus的list方法，返回的是一个集合
         List<Comment> comments = list(queryWrapper);
 
         List<CommentVo> commentVos = toCommentVoList(comments);
