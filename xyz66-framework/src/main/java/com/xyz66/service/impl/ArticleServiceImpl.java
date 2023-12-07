@@ -1,6 +1,7 @@
 package com.xyz66.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xyz66.constants.SystemConstants;
@@ -37,14 +38,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private ArticleTagService articleTagService;
-    
-    @Autowired
-    private ArticleService articleService;
     @Override
     public ResponseResult hotArticleList() {
         //查询热门文章 封装成ResponseResult返回
         // 构建查询条件,查询热门文章
-        List<Article> articles = articleService.lambdaQuery()
+        // mybatis-plus,this的意思是当前类，lambdaQuery()是mybatis-plus提供的查询方法，通过继承了ServiceImpl类，可以直接调用,便于自身的查询
+        List<Article> articles = this.lambdaQuery().select(Article::getId, Article::getTitle, Article::getSummary, Article::getThumbnail, Article::getViewCount)
                 .eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL)
                 .orderByDesc(Article::getViewCount)
                 .last("limit 10")

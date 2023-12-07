@@ -11,6 +11,7 @@ import com.xyz66.domain.vo.PageVo;
 import com.xyz66.mapper.LinkMapper;
 import com.xyz66.service.LinkService;
 import com.xyz66.utils.BeanCopyUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,7 +26,7 @@ import java.util.Objects;
  */
 @Service("linkService")
 public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements LinkService {
-
+    
     @Override
     public ResponseResult getAllLink() {
         //查询所有审核通过的
