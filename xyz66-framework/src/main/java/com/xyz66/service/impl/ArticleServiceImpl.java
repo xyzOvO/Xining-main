@@ -43,6 +43,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //查询热门文章 封装成ResponseResult返回
         // 构建查询条件,查询热门文章
         // mybatis-plus,this的意思是当前类，lambdaQuery()是mybatis-plus提供的查询方法，通过继承了ServiceImpl类，可以直接调用,便于自身的查询
+        // 也可以不加this.加入this是为了提高可读和一致性
         List<Article> articles = this.lambdaQuery().select(Article::getId, Article::getTitle, Article::getSummary, Article::getThumbnail, Article::getViewCount)
                 .eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_NORMAL)
                 .orderByDesc(Article::getViewCount)

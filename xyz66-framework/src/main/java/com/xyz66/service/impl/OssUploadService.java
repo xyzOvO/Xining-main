@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 
+@SuppressWarnings("ConfigurationProperties")
 @Service
 @Data
 @ConfigurationProperties(prefix = "oss")
@@ -63,7 +64,13 @@ public ResponseResult uploadImg(MultipartFile img) {
     private String bucket;
 
 
-    private String uploadOss(MultipartFile imgFile, String filePath){
+    /**
+     * 上传文件
+     * @param imgFile
+     * @param filePath
+     * @return
+     */
+     private String uploadOss(MultipartFile imgFile, String filePath){
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.autoRegion());
         //...其他参数参考类注释
@@ -80,7 +87,7 @@ public ResponseResult uploadImg(MultipartFile img) {
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
                 System.out.println(putRet.key);
                 System.out.println(putRet.hash);
-                return "http://rxbyapge1.hn-bkt.clouddn.com/"+key;
+                return "http://s59xujkc2.hd-bkt.clouddn.com/"+key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 System.err.println(r.toString());

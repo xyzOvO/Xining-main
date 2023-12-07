@@ -58,7 +58,7 @@ mybatis-plus:
       id-type: auto
 
 oss:
-  # TODO：过期了
+  # TODO：过期了记得去七牛云删空间重建白嫖30天
   accessKey: 65nR5ZLqcCvRCnRkX5IjTFrLpWWMljyorzyIeU9r
   secretKey: MEeDOA6JkYuH0ci39YuMHF6g8PZVpmxRAQl2G9in
-  bucket: xyz-2001
+  bucket: xyz66

@@ -9,8 +9,8 @@ import com.xyz66.domain.vo.PageVo;
 /**
  * 友链(Link)表服务接口
  *
- * @author makejava
- * @since 2022-02-03 12:22:53
+ *
+ * @author xyz66 Email:2910223554@qq.com
  */
 public interface LinkService extends IService<Link> {
 

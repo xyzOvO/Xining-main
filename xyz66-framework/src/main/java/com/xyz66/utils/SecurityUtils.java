@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
- * @Author 三更  B站： https://space.bilibili.com/663528522
+ * SpringSecurity安全工具类
  */
 public class SecurityUtils
 {
