@@ -55,10 +55,7 @@ public class CommentController {
     @ApiImplicitParam(name = "addCommentDto", value = "评论json")
     @PostMapping
     public ResponseResult addComment(@RequestBody AddCommentDto addCommentDto) {
-        // 检查是否登录
-        if (addCommentDto.getCreateBy() == null) {
-            return ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
-        }
+        // 检查是否登录进Implementation层
         Comment comment = BeanCopyUtils.copyBean(addCommentDto, Comment.class);
         return commentService.addComment(comment);
     }

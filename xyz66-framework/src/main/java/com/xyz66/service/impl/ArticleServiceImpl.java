@@ -12,6 +12,7 @@ import com.xyz66.domain.entity.Article;
 import com.xyz66.domain.entity.ArticleTag;
 import com.xyz66.domain.entity.Category;
 import com.xyz66.domain.vo.*;
+import com.xyz66.enums.AppHttpCodeEnum;
 import com.xyz66.mapper.ArticleMapper;
 import com.xyz66.service.ArticleService;
 import com.xyz66.service.ArticleTagService;
@@ -138,11 +139,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     @Transactional
     public ResponseResult add(AddArticleDto articleDto) {
+        // 异常判断
+        if (articleDto.getTitle() == null || articleDto.getTags().size() == 0 || articleDto.getCategoryId() == 0 || articleDto.getContent().length() == 0) {
+            return ResponseResult.errorResult(AppHttpCodeEnum.THE_ARTICLE_IS_INCOMPLETE);
+        }
         //添加 博客
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
         save(article);
-
-
         List<ArticleTag> articleTags = articleDto.getTags().stream()
                 .map(tagId -> new ArticleTag(article.getId(), tagId))
                 .collect(Collectors.toList());

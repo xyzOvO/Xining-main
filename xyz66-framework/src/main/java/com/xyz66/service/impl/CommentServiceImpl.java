@@ -71,6 +71,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
 
     @Override
     public ResponseResult addComment(Comment comment) {
+        // 获取当前登录用户
+        
+//        if(comment.getCreateBy()==null){
+//            throw new SystemException(AppHttpCodeEnum.NEED_LOGIN);
+//        }
         //评论内容不能为空
         if(!StringUtils.hasText(comment.getContent())){
             throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
