@@ -7,8 +7,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * 配置自动填充,更新时间,创建时间,创建人,更新人
+ */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
+    
+    /**
+     * 插入时自动填充字段
+     * @param metaObject
+     */
     @Override
     public void insertFill(MetaObject metaObject) {
         Long userId = null;

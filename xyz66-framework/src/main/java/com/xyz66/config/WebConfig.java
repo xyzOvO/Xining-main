@@ -13,6 +13,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/**
+ * WebConfig用于配置跨域和利用fastjson序列化
+ * 
+ */
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

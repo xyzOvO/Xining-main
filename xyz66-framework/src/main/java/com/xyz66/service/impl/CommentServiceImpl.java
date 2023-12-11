@@ -1,5 +1,6 @@
 package com.xyz66.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -80,7 +81,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         if(!StringUtils.hasText(comment.getContent())){
             throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
         }
+        System.out.println(JSON.toJSONString(comment));
+        // 没有传createBy，默认给当前登录用户，利用Mybatis-plus的自动填充功能
         save(comment);
+        // 检查创建人是否存在
+        System.out.println(JSON.toJSONString(comment));
         return ResponseResult.okResult();
     }
 
