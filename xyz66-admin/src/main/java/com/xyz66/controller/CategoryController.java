@@ -101,4 +101,11 @@ public class CategoryController {
             WebUtils.renderString(response, JSON.toJSONString(result));
         }
     }
+    
+    @ApiOperation(value = "修改分类状态")
+    @PutMapping("/updateStatus")
+    public ResponseResult updateStatus(@RequestBody Category category){
+        categoryService.updateById(category);
+        return ResponseResult.okResult();
+    }
 }
