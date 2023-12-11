@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 权限服务
+ */
 @Service("ps")
 public class PermissionService {
 

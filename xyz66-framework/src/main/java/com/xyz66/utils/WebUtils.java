@@ -25,6 +25,7 @@ public class WebUtils {
     }
 
     public static void setDownLoadHeader(String filename, HttpServletResponse response) throws UnsupportedEncodingException {
+        // 设置文件类型,防止中文乱码
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
         String fname = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
