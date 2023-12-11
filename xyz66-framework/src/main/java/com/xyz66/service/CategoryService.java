@@ -23,5 +23,7 @@ public interface CategoryService extends IService<Category> {
     List<CategoryVo> listAllCategory();
 
     PageVo selectCategoryPage(Category category, Integer pageNum, Integer pageSize);
+
+    boolean checkCategoryNameUnique(String name);
 }
 

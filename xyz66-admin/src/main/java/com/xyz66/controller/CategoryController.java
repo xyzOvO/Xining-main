@@ -38,7 +38,7 @@ public class CategoryController {
         return ResponseResult.okResult(list);
     }
 
-    @ApiOperation(value = "添加分类")
+    @ApiOperation(value = "编辑分类")
     @PutMapping
     public ResponseResult edit(@RequestBody Category category) {
         categoryService.updateById(category);
@@ -62,6 +62,10 @@ public class CategoryController {
     @ApiOperation(value = "添加分类")
     @PostMapping
     public ResponseResult add(@RequestBody Category category) {
+        // 是否有相同分类名
+        if (!categoryService.checkCategoryNameUnique(category.getName())) {
+            return ResponseResult.errorResult(AppHttpCodeEnum.CLASS_NAME_DUPLICATION);
+        }
         categoryService.save(category);
         return ResponseResult.okResult();
     }

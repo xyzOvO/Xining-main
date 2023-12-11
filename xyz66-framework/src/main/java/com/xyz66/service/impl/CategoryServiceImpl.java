@@ -92,5 +92,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         pageVo.setRows(categories);
         return pageVo;
     }
+
+    @Override
+    public boolean checkCategoryNameUnique(String name) {
+//        if (this.count(this.lambdaQuery().eq(Category::getName, name)) > 0){
+//            return false;
+//        }
+        if (count(new LambdaQueryWrapper<Category>().eq(Category::getName, name)) > 0) {
+            return false;
+        }
+        return true;
+    }
 }
 
