@@ -14,25 +14,19 @@ import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.WebUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
  * @author xyz66 Email:2910223554@qq.com
  */
 @Api(tags = SwaggerConfig.TAG_2)
+//@Controller// EasyExcel:这里注意下注解是@Controller ，不是RestController
 @RestController
 @RequestMapping("/content/category")
 public class CategoryController {
@@ -95,20 +89,15 @@ public class CategoryController {
         //设置下载文件的请求头,告诉浏览器输出的是excel文件
         try {
             WebUtils.setDownLoadHeader("分类.xlsx", response);
-        } catch (UnsupportedEncodingException e) {
-            //如果出现异常也要响应json
-            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
-            WebUtils.renderString(response, JSON.toJSONString(result));
-        }
-        try {
             //获取需要导出的数据
             List<Category> categoryVos = categoryService.list();
             List<ExcelCategoryVo> excelCategoryVos = BeanCopyUtils.copyBeanList(categoryVos, ExcelCategoryVo.class);
 //            String fileName = "C:\\Users\\古井枯塘\\Desktop\\分类数据.xlsx";
             System.out.println(JSON.toJSONString(excelCategoryVos));
             //把数据写入到Excel中
-            EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("分类导出")
+            EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("模板")
                     .doWrite(excelCategoryVos);
+
 //            EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("分类导出").doWrite(excelCategoryVos);
             System.out.println("导出成功");
 //            // 使用Apache POI库创建工作簿和工作表，并将数据写入Excel  
@@ -133,15 +122,16 @@ public class CategoryController {
 //            workbook.close();
 
         } catch (Exception e) {
+            e.printStackTrace();
             //如果出现异常也要响应json
-            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
-            WebUtils.renderString(response, JSON.toJSONString(result));
+//            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+//            WebUtils.renderString(response, JSON.toJSONString(result));
         }
     }
-    
+
     @ApiOperation(value = "修改分类状态")
     @PutMapping("/updateStatus")
-    public ResponseResult updateStatus(@RequestBody Category category){
+    public ResponseResult updateStatus(@RequestBody Category category) {
         categoryService.updateById(category);
         return ResponseResult.okResult();
     }

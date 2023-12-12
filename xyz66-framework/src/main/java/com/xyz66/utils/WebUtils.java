@@ -26,10 +26,12 @@ public class WebUtils {
 
     public static void setDownLoadHeader(String filename, HttpServletResponse response) throws UnsupportedEncodingException {
         // 设置文件类型,防止中文乱码
+        //https://easyexcel.opensource.alibaba.com/docs/current/quickstart/write#web%E4%B8%AD%E7%9A%84%E5%86%99
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
         response.setCharacterEncoding("utf-8");
-        String fname = URLEncoder.encode(filename, "UTF-8").replaceAll("\\+", "%20");
-        response.setHeader("Content-disposition", "attachment; filename=" + fname);
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("测试", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName);
     }
 
 }
