@@ -94,7 +94,7 @@ public class CategoryController {
             List<ExcelCategoryVo> excelCategoryVos = BeanCopyUtils.copyBeanList(categoryVos, ExcelCategoryVo.class);
 //            String fileName = "C:\\Users\\古井枯塘\\Desktop\\分类数据.xlsx";
             System.out.println(JSON.toJSONString(excelCategoryVos));
-            //把数据写入到Excel中
+            //把数据写入到Excel中,后台以流的形式写到客户端
             EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("模板")
                     .doWrite(excelCategoryVos);
 
