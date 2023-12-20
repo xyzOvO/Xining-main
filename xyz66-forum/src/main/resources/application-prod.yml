@@ -1,0 +1,9 @@
+# 数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+        master:
+        url: jdbc:mysql://localhost:3306/xi_ning?characterEncoding=utf-8&serverTimezone=UTC
+        username: root
+        password: 1234

@@ -29,6 +29,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- 阿里数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>1.2.16</version>
+            </dependency>
             <!--fastjson依赖-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -82,9 +88,12 @@
     </dependencyManagement>
 
     <!--  打包插件  -->
+    <!--  告诉maven，构建行为开始定制  -->
     <build>
+        <!--   需要构建的插件     -->
         <plugins>
             <plugin>
+                <!--       插件的坐标，这里是SpringBoot提供的打包插件         -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.2.6.RELEASE</version>
@@ -96,6 +105,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
+
+                <!--       配置configuration节点，指定编译器的版本和编码，配置插件         -->
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -108,6 +119,7 @@
             <!--                <artifactId>maven-compiler-plugin</artifactId>-->
             <!--                <version>3.10.1</version>-->
             <!--            </plugin>-->
+
             <!-- 此插件必须放在父 POM 中  -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
