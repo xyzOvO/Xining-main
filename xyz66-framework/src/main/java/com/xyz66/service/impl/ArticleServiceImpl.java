@@ -30,13 +30,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 注入redis会有问题
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
-//    @Autowired
+    @Autowired
     private CategoryService categoryService;
 
-//    @Autowired
+    @Autowired
     private RedisCache redisCache;
 
 //    @Autowired

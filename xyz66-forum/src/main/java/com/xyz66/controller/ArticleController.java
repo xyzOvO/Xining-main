@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,16 +42,19 @@ public class ArticleController {
         return articleService.articleList(pageNum, pageSize, categoryId);
     }
 
-    @PutMapping("/updateViewCount/{id}")
+
+//    @PreAuthorize("@test.cs('雪豹闭嘴')")
     @ApiOperation(value = "更新浏览次数+1")
     @ApiImplicitParam(name = "id", value = "文章ID")
+    @PutMapping("/updateViewCount/{id}")
     public ResponseResult updateViewCount(@PathVariable("id") Long id) {
         return articleService.updateViewCount(id);
     }
 
-    @GetMapping("/{id}")
+
     @ApiOperation(value = "获取文章详细信息")
     @ApiImplicitParam(name = "id", value = "文章ID")
+    @GetMapping("/{id}")
     public ResponseResult getArticleDetail(@PathVariable("id") Long id) {
         return articleService.getArticleDetail(id);
     }
