@@ -21,6 +21,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * 解决 无法直接注入 AuthenticationManager
+     *
+     * @return
+     * @throws Exception
+     */
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
