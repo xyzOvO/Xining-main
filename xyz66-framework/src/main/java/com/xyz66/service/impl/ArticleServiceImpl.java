@@ -19,6 +19,7 @@ import com.xyz66.service.ArticleTagService;
 import com.xyz66.service.CategoryService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.RedisCache;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,15 +30,16 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
-    @Autowired
+//    @Autowired
     private CategoryService categoryService;
 
-    @Autowired
+//    @Autowired
     private RedisCache redisCache;
 
-    @Autowired
+//    @Autowired
     private ArticleTagService articleTagService;
     @Override
     public ResponseResult hotArticleList() {
