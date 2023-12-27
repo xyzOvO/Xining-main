@@ -82,7 +82,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             throw new SystemException(AppHttpCodeEnum.CONTENT_NOT_NULL);
         }
         // 没有传createBy，默认给当前登录用户，利用Mybatis-plus的自动填充功能
-        save(comment);
+        try {
+            save(comment);
+        } catch (Exception e) {
+            return ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
+        }
         return ResponseResult.okResult();
     }
 

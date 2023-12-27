@@ -11,6 +11,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 用户管理
+ */
 @Api(tags = SwaggerConfig.TAG_5)
 @RestController
 @RequestMapping("/user")
