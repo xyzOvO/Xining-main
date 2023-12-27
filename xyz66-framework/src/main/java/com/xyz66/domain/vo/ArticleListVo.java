@@ -20,7 +20,9 @@ public class ArticleListVo {
     private String categoryName;
     //缩略图
     private String thumbnail;
-
+    
+    //分类
+    private Long categoryId;
 
     //访问量
     private Long viewCount;
