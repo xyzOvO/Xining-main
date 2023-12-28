@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.xyz66.domain.entity.Article;
 import com.xyz66.service.ArticleService;
 import com.xyz66.utils.RedisCache;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
+@Log4j2
 public class UpdateViewCountJob {
 
     @Autowired
@@ -50,13 +52,15 @@ public class UpdateViewCountJob {
                 .map(entry ->
                         new Article(Long.valueOf(entry.getKey()), entry.getValue().longValue()))
                 .collect(Collectors.toList());
-        System.out.println("------执行定时任务：更新文章浏览量--------");
+        log.info("------执行定时任务：更新文章浏览量--------");
+//        System.out.println("------执行定时任务：更新文章浏览量--------");
         for (Article article : articles) {
             LambdaUpdateWrapper<Article> updateWrapper = new LambdaUpdateWrapper<>();
             updateWrapper.eq(Article::getId, article.getId());
             updateWrapper.set(Article::getViewCount, article.getViewCount());
             articleService.update(updateWrapper);
         }
-        System.out.println("--------------更新完毕----------------");
+        log.info("--------------更新完毕----------------");
+//        System.out.println("--------------更新完毕----------------");
     }
 }
