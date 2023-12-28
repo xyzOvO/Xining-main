@@ -31,12 +31,12 @@ import java.util.stream.Collectors;
  * @since 2022-02-02 12:29:52
  */
 @Service("categoryService")
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 必须参数，final，@NonNull
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 必须参数，final，@NonNull
 //@AllArgsConstructor// 所有参数
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
-    @Autowired
-    private  ArticleService articleService;
+//    @Autowired
+    private final ArticleService articleService;
 
     /**
      * 获取分类列表

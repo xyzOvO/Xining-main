@@ -20,9 +20,11 @@ import com.xyz66.service.CategoryService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.RedisCache;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -31,20 +33,21 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Service
+@Service("articleService")
 @Log4j2
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 要注入的不标记为final，会有问题，报空指针
+@RequiredArgsConstructor(onConstructor =@__(@Autowired))// 要注入的不标记为final，会有问题，报空指针
 //@AllArgsConstructor// 还是会循环依赖
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
-    @Autowired
+    @Autowired // 这里会产生循环依赖，要单独注入
+//    @Lazy// 懒加载，懒加载的意思是，只有在调用的时候才去初始化，初始化的时候，才会去调用构造方法，初始化的时候，才会去调用set方法
     private CategoryService categoryService;
 
     @Autowired
     private RedisCache redisCache;
 
-    @Autowired
-    private ArticleTagService articleTagService;
+//    @Autowired
+    private final ArticleTagService articleTagService;
     @Override
     public ResponseResult hotArticleList() {
         //查询热门文章 封装成ResponseResult返回

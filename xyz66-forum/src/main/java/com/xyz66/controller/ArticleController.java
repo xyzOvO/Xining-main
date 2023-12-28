@@ -20,10 +20,11 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = SwaggerConfig.TAG_1)
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @RequestMapping("/article")
 public class ArticleController {
-    @Autowired
-    private ArticleService articleService;
+//    @Autowired
+    private final ArticleService articleService;
 
     @GetMapping("/hotArticleList")
     @ApiOperation(value = "获取热门文章", notes = "获取热门文章")

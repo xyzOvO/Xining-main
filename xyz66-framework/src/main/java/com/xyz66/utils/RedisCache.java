@@ -1,5 +1,6 @@
 package com.xyz66.utils;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundSetOperations;
 import org.springframework.data.redis.core.HashOperations;
@@ -12,10 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings(value = { "unchecked", "rawtypes" })
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class RedisCache
 {
-    @Autowired
-    public RedisTemplate redisTemplate;
+    public final RedisTemplate redisTemplate;
 
     /**
      * 缓存基本的对象，Integer、String、实体类等
