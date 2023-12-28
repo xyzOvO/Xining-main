@@ -20,6 +20,7 @@ import com.xyz66.service.CategoryService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.RedisCache;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,17 +31,18 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 注入redis会有问题
+@Log4j2
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 要注入的不标记为final，会有问题，报空指针
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
 
-    @Autowired
-    private CategoryService categoryService;
-
-    @Autowired
-    private RedisCache redisCache;
+//    @Autowired
+    private final CategoryService categoryService;
 
 //    @Autowired
-    private ArticleTagService articleTagService;
+    private final RedisCache redisCache;
+
+//    @Autowired
+    private final ArticleTagService articleTagService;
     @Override
     public ResponseResult hotArticleList() {
         //查询热门文章 封装成ResponseResult返回
@@ -151,7 +153,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<ArticleTag> articleTags = articleDto.getTags().stream()
                 .map(tagId -> new ArticleTag(article.getId(), tagId))
                 .collect(Collectors.toList());
-
+        log.info("articleTags:{}", articleTags);
         //添加 博客和标签的关联
         articleTagService.saveBatch(articleTags);
         return ResponseResult.okResult();
