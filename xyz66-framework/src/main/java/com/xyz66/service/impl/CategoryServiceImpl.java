@@ -13,6 +13,8 @@ import com.xyz66.mapper.CategoryMapper;
 import com.xyz66.service.ArticleService;
 import com.xyz66.service.CategoryService;
 import com.xyz66.utils.BeanCopyUtils;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -29,10 +31,12 @@ import java.util.stream.Collectors;
  * @since 2022-02-02 12:29:52
  */
 @Service("categoryService")
+//@RequiredArgsConstructor(onConstructor = @__(@Autowired))// 必须参数，final，@NonNull
+//@AllArgsConstructor// 所有参数
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
     @Autowired
-    private ArticleService articleService;
+    private  ArticleService articleService;
 
     /**
      * 获取分类列表
