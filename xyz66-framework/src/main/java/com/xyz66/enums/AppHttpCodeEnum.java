@@ -19,7 +19,10 @@ public enum AppHttpCodeEnum {
     NICKNAME_EXIST(512, "昵称已存在"),
     THE_ARTICLE_IS_INCOMPLETE(513, "文章未填完整"),
     CLASS_NAME_DUPLICATION(514, "分类名重复"),
-    LOGIN_ERROR(505,"用户名或密码错误");
+    LOGIN_ERROR(505,"用户名或密码错误"),
+
+    USERNAME_RESTRAINT(515, "用户名只能由字母数字组成");
+
     int code;
     String msg;
 

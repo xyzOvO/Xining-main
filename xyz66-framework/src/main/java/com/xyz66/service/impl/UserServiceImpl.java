@@ -24,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,10 +91,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             // 昵称存在
             throw new SystemException(AppHttpCodeEnum.NICKNAME_EXIST);
         }
+        if (!this.usernameJudgment(user)){
+            throw new SystemException(AppHttpCodeEnum.USERNAME_RESTRAINT);
+        }
         //对密码进行加密
         // 转成密文 - 哈希加密+随机盐
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
+        user.setCreateTime(new Date());
         //存入数据库
         save(user);
         return ResponseResult.okResult();
@@ -165,9 +170,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         updateById(user);
     }
 
+    @Override
+    public boolean usernameJudgment(User user) {
+        // 用户名只能由字母数字组成
+        String userName = user.getUserName();
+        if(StringUtils.hasText(userName)&&userName.matches("^[a-zA-Z0-9]+$")){
+            return true;
+        }
+        return false;
+    }
+
     @Autowired
     private UserRoleService userRoleService;
 
+    /**
+     * 新增用户与角色管理
+     * @param user 用户对象
+     */
     private void insertUserRole(User user) {
         List<UserRole> sysUserRoles = Arrays.stream(user.getRoleIds())
                 .map(roleId -> new UserRole(user.getId(), roleId)).collect(Collectors.toList());

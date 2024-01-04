@@ -1,5 +1,6 @@
 package com.xyz66.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -57,12 +58,14 @@ public class User  {
     @ApiModelProperty(notes = "创建人的用户id")
     private Long createBy;
     //创建时间
+//    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(notes = "创建时间")
     private Date createTime;
     //更新人
     @ApiModelProperty(notes = "更新人")
     private Long updateBy;
     //更新时间
+//    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(notes = "更新时间")
     private Date updateTime;
     //删除标志（0代表未删除，1代表已删除）

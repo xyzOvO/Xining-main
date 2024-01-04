@@ -30,5 +30,12 @@ public interface UserService extends IService<User> {
     ResponseResult addUser(User user);
 
     void updateUser(User user);
+
+    /**
+     * 用户名判断-只能由字母数字组成
+     * @param user
+     * @return
+     */
+    boolean usernameJudgment(User user);
 }
 
