@@ -24,7 +24,7 @@ import java.io.InputStream;
 @Service
 @Data
 @ConfigurationProperties(prefix = "oss")
-public class OssUploadService implements UploadService {
+public class OssUploadServiceImpl implements UploadService {
 //    @Override
 //    public ResponseResult uploadImg(MultipartFile img) throws IOException {
 //        //判断文件类型
