@@ -49,5 +49,4 @@ public class UserController {
     public ResponseResult register(@RequestBody User user) { // 注册用户的请求方法
         return userService.register(user); // 调用用户服务的注册方法，并返回注册结果
     }
-
 }
