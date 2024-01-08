@@ -21,6 +21,10 @@ public interface RoleService extends IService<Role> {
 
     void insertRole(Role role);
 
+    /**
+     * 修改角色
+     * @param role
+     */
     void updateRole(Role role);
 
     List<Role> selectRoleAll();

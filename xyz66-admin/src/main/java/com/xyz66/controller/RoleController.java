@@ -72,6 +72,11 @@ public class RoleController {
         return roleService.selectRolePage(role, pageNum, pageSize);
     }
 
+    /**
+     * 修改角色状态
+     * @param roleStatusDto
+     * @return
+     */
     @PutMapping("/changeStatus")
     public ResponseResult changeStatus(@RequestBody ChangeRoleStatusDto roleStatusDto) {
         Role role = new Role();

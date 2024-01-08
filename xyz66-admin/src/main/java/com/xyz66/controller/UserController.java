@@ -2,6 +2,8 @@ package com.xyz66.controller;
 
 import com.xyz66.config.SwaggerConfig;
 import com.xyz66.domain.ResponseResult;
+import com.xyz66.domain.dto.ChangeRoleStatusDto;
+import com.xyz66.domain.dto.UserStatusUpdateDTO;
 import com.xyz66.domain.entity.Role;
 import com.xyz66.domain.entity.User;
 import com.xyz66.domain.vo.UserInfoAndRoleIdsVo;
@@ -97,5 +99,19 @@ public class UserController {
         }
         userService.removeByIds(userIds);
         return ResponseResult.okResult();
+    }
+
+    /**
+     * 修改用户状态
+     * @param 
+     * @return
+     */
+    @PutMapping("/changeStatus")
+    public ResponseResult UserChangeStatus(@RequestBody UserStatusUpdateDTO userStatusUpdate) {
+        User user = new User();
+        user.setId(userStatusUpdate.getId());
+        user.setStatus(userStatusUpdate.getStatus());
+        // 通过ID修改用户状态-mybatis-plus
+        return ResponseResult.okResult(userService.updateById(user));
     }
 }
