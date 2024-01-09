@@ -29,9 +29,9 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     public ResponseResult<PageVo> pageTagList(Integer pageNum, Integer pageSize, TagListDto tagListDto) {
         //分页查询
         LambdaQueryWrapper<Tag> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(StringUtils.hasText(tagListDto.getName()),Tag::getName,tagListDto.getName());
-        queryWrapper.eq(StringUtils.hasText(tagListDto.getRemark()),Tag::getRemark,tagListDto.getRemark());
-
+        // 模糊查询
+        queryWrapper.like(StringUtils.hasText(tagListDto.getName()),Tag::getName,tagListDto.getName());
+//        queryWrapper.like(StringUtils.hasText(tagListDto.getRemark()),Tag::getRemark,tagListDto.getRemark());
         Page<Tag> page = new Page<>();
         page.setCurrent(pageNum);
         page.setSize(pageSize);
@@ -48,6 +48,10 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         List<Tag> list = list(wrapper);
         List<TagVo> tagVos = BeanCopyUtils.copyBeanList(list, TagVo.class);
         return tagVos;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(StringUtils.hasText("  "));
     }
 }
 
