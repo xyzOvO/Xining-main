@@ -146,7 +146,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     @Transactional
     public ResponseResult addUser(User user) {
-        //密码加密处理
+        // 对密码进行加密处理
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         save(user);
 
@@ -156,6 +156,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return ResponseResult.okResult();
     }
 
+
     @Override
     @Transactional
     public void updateUser(User user) {
@@ -163,7 +164,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<UserRole> userRoleUpdateWrapper = new LambdaQueryWrapper<>();
         userRoleUpdateWrapper.eq(UserRole::getUserId,user.getId());
         userRoleService.remove(userRoleUpdateWrapper);
-
         // 新增用户与角色管理
         insertUserRole(user);
         // 更新用户信息

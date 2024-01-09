@@ -48,18 +48,19 @@ public class UserController {
     @ApiOperation(value = "新增用户")
     @PostMapping
     public ResponseResult add(@RequestBody User user) {
+        // 检查用户名是否为空 
         if (!StringUtils.hasText(user.getUserName())) {
             throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
-        }
+        } // 检查用户名是否唯一 
         if (!userService.checkUserNameUnique(user.getUserName())) {
             throw new SystemException(AppHttpCodeEnum.USERNAME_EXIST);
-        }
+        } // 检查手机号码是否唯一
         if (!userService.checkPhoneUnique(user)) {
             throw new SystemException(AppHttpCodeEnum.PHONENUMBER_EXIST);
-        }
+        } // 检查邮箱地址是否唯一 
         if (!userService.checkEmailUnique(user)) {
             throw new SystemException(AppHttpCodeEnum.EMAIL_EXIST);
-        }
+        } // 调用服务层添加用户 
         return userService.addUser(user);
     }
 
@@ -103,7 +104,8 @@ public class UserController {
 
     /**
      * 修改用户状态
-     * @param 
+     *
+     * @param
      * @return
      */
     @PutMapping("/changeStatus")

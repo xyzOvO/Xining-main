@@ -26,7 +26,7 @@ public class ViewCountRunner implements ApplicationRunner {
 
 //    @Override
 //    public void run(String... args) throws Exception {
-//        //查询博客信息  id  viewCount
+//        //查询文章信息  id  viewCount
 //        List<Article> articles = articleMapper.selectList(null);
 //        Map<String, Integer> viewCountMap = articles.stream()
 //                .collect(Collectors.toMap(article -> article.getId().toString(), article -> {
@@ -40,7 +40,7 @@ public class ViewCountRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         log.info("读取文章浏览量->Redis");
-        //查询博客信息  id  viewCount
+        //查询文章信息  id  viewCount
         List<Article> articles = articleMapper.selectList(null);
         Map<String, Integer> viewCountMap = articles.stream()
                 .collect(Collectors.toMap(article -> article.getId().toString(), article -> {

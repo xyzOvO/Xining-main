@@ -153,14 +153,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (articleDto.getTitle() == null || articleDto.getTags().size() == 0 || articleDto.getCategoryId() == 0 || articleDto.getContent().length() == 0) {
             return ResponseResult.errorResult(AppHttpCodeEnum.THE_ARTICLE_IS_INCOMPLETE);
         }
-        //添加 博客
+        //添加 文章
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
         save(article);
         List<ArticleTag> articleTags = articleDto.getTags().stream()
                 .map(tagId -> new ArticleTag(article.getId(), tagId))
                 .collect(Collectors.toList());
         log.info("articleTags:{}", articleTags);
-        //添加 博客和标签的关联
+        //添加 文章和标签的关联
         articleTagService.saveBatch(articleTags);
         return ResponseResult.okResult();
     }
@@ -205,17 +205,16 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public void edit(ArticleDto articleDto) {
         Article article = BeanCopyUtils.copyBean(articleDto, Article.class);
-        //更新博客信息
+        //更新文章信息
         updateById(article);
-        //删除原有的 标签和博客的关联
+        //删除原有的 标签和文章的关联
         LambdaQueryWrapper<ArticleTag> articleTagLambdaQueryWrapper = new LambdaQueryWrapper<>();
         articleTagLambdaQueryWrapper.eq(ArticleTag::getArticleId,article.getId());
         articleTagService.remove(articleTagLambdaQueryWrapper);
-        //添加新的博客和标签的关联信息
+        //添加新的文章和标签的关联信息
         List<ArticleTag> articleTags = articleDto.getTags().stream()
                 .map(tagId -> new ArticleTag(articleDto.getId(), tagId))
                 .collect(Collectors.toList());
         articleTagService.saveBatch(articleTags);
-
     }
 }

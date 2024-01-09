@@ -53,7 +53,7 @@ public class ArticleController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNum", value = "页码"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量"),
-            @ApiImplicitParam(name = "article", value = "文章对象")}
+            @ApiImplicitParam(name = "article", value = "要查询的文章对象")}
     )
     public ResponseResult list(Article article, Integer pageNum, Integer pageSize) {
         PageVo pageVo = articleService.selectArticlePage(article, pageNum, pageSize);

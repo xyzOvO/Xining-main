@@ -70,13 +70,25 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Override
     @Transactional
     public void insertRole(Role role) {
+        // 保存角色信息
         save(role);
+        
+        // 打印角色ID
         System.out.println(role.getId());
+        
+        // 判断角色是否有关联的菜单ID
         if(role.getMenuIds()!=null&&role.getMenuIds().length>0){
+            // 插入角色与菜单的关系
             insertRoleMenu(role);
         }
     }
 
+
+    /**
+     * 更新角色信息
+     *
+     * @param role 需要更新的角色对象
+     */
     @Override
     public void updateRole(Role role) {
         updateById(role);

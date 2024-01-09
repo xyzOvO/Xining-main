@@ -64,7 +64,6 @@ public class RoleController {
     public ResponseResult add(@RequestBody Role role) {
         roleService.insertRole(role);
         return ResponseResult.okResult();
-
     }
 
     @GetMapping("/list")
