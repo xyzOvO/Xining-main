@@ -98,7 +98,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 转成密文 - 哈希加密+随机盐
         String encodePassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePassword);
-        user.setCreateTime(new Date());
         //存入数据库
         save(user);
         return ResponseResult.okResult();
