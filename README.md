@@ -44,6 +44,14 @@ IDEA演示：
 
 ![image-20240105160658432](https://cdn.jsdelivr.net/gh/xiaoyangzi2001/Imgs/img/image-20240105160658432.png)
 
+前台swagger接口文档：[前台接口文档](http://localhost:8989/swagger-ui.html)
+
+![image-20240110170929516](https://cdn.jsdelivr.net/gh/xiaoyangzi2001/Imgs/img/image-20240110170929516.png)
+
+后台swagger接口文档：[后台接口文档](http://localhost:7777/swagger-ui.html)
+
+![image-20240110171003384](https://cdn.jsdelivr.net/gh/xiaoyangzi2001/Imgs/img/image-20240110171003384.png)
+
 ### 前端
 
 VSCode演示：
