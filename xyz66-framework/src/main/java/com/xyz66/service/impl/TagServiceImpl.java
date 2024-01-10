@@ -49,9 +49,5 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         List<TagVo> tagVos = BeanCopyUtils.copyBeanList(list, TagVo.class);
         return tagVos;
     }
-
-    public static void main(String[] args) {
-        System.out.println(StringUtils.hasText("  "));
-    }
 }
 

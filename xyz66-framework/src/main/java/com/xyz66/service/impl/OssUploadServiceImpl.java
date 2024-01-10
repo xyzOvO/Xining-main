@@ -14,6 +14,8 @@ import com.xyz66.exception.SystemException;
 import com.xyz66.service.UploadService;
 import com.xyz66.utils.PathUtils;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,11 +23,15 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.InputStream;
 
 @SuppressWarnings("ConfigurationProperties")
+//@Slf4j
 @Service
 @Data
 @ConfigurationProperties(prefix = "oss")
 public class OssUploadServiceImpl implements UploadService {
-//    @Override
+    // 日志
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    //    @Override
 //    public ResponseResult uploadImg(MultipartFile img) throws IOException {
 //        //判断文件类型
 //        //获取原始文件名
@@ -43,21 +49,21 @@ public class OssUploadServiceImpl implements UploadService {
 //
 //        return ResponseResult.okResult(url);
 //    }
-@Override
-public ResponseResult uploadImg(MultipartFile img) {
-    //判断文件类型
-    //获取原始文件名
-    String originalFilename = img.getOriginalFilename();
-    //对原始文件名进行判断
-    if(!originalFilename.endsWith(".png")){
-        throw new SystemException(AppHttpCodeEnum.FILE_TYPE_ERROR);
-    }
+    @Override
+    public ResponseResult uploadImg(MultipartFile img) {
+        //判断文件类型
+        //获取原始文件名
+        String originalFilename = img.getOriginalFilename();
+        //对原始文件名进行判断
+        if (!originalFilename.endsWith(".png")) {
+            throw new SystemException(AppHttpCodeEnum.FILE_TYPE_ERROR);
+        }
 
-    //如果判断通过上传文件到OSS
-    String filePath = PathUtils.generateFilePath(originalFilename);
-    String url = uploadOss(img,filePath);//  2099/2/3/wqeqeqe.png
-    return ResponseResult.okResult(url);
-}
+        //如果判断通过上传文件到OSS
+        String filePath = PathUtils.generateFilePath(originalFilename);
+        String url = uploadOss(img, filePath);//  2099/2/3/wqeqeqe.png
+        return ResponseResult.okResult(url);
+    }
 
     private String accessKey;
     private String secretKey;
@@ -66,11 +72,12 @@ public ResponseResult uploadImg(MultipartFile img) {
 
     /**
      * 上传文件
+     *
      * @param imgFile
      * @param filePath
      * @return
      */
-     private String uploadOss(MultipartFile imgFile, String filePath){
+    private String uploadOss(MultipartFile imgFile, String filePath) {
         //构造一个带指定 Region 对象的配置类
         Configuration cfg = new Configuration(Region.autoRegion());
         //...其他参数参考类注释
@@ -82,12 +89,14 @@ public ResponseResult uploadImg(MultipartFile img) {
             Auth auth = Auth.create(accessKey, secretKey);
             String upToken = auth.uploadToken(bucket);
             try {
-                Response response = uploadManager.put(inputStream,key,upToken,null, null);
+                Response response = uploadManager.put(inputStream, key, upToken, null, null);
                 //解析上传成功的结果
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-                System.out.println(putRet.key);
-                System.out.println(putRet.hash);
-                return "http://s59xujkc2.hd-bkt.clouddn.com/"+key;
+//                System.out.println(putRet.key);
+//                System.out.println(putRet.hash);
+                log.info(putRet.key);
+                log.info(putRet.hash);
+                return "http://s59xujkc2.hd-bkt.clouddn.com/" + key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 System.err.println(r.toString());

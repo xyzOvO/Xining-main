@@ -1,7 +1,6 @@
 package com.xyz66.controller;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.fastjson.JSON;
 import com.xyz66.config.SwaggerConfig;
 import com.xyz66.domain.ResponseResult;
 import com.xyz66.domain.entity.Category;
@@ -14,9 +13,9 @@ import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.WebUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +25,7 @@ import java.util.List;
  * 分类管理
  * @author xyz66 Email:2910223554@qq.com
  */
+@Slf4j
 @Api(tags = SwaggerConfig.TAG_2)
 //@Controller// EasyExcel:这里注意下注解是@Controller ，不是RestController
 @RestController
@@ -83,6 +83,7 @@ public class CategoryController {
         return ResponseResult.okResult(pageVo);
     }
 
+
     @ApiOperation(value = "导出分类")
     @PreAuthorize("@ps.hasPermission('content:category:export')")// 权限控制注解
     @GetMapping("/export")
@@ -94,13 +95,13 @@ public class CategoryController {
             List<Category> categoryVos = categoryService.list();
             List<ExcelCategoryVo> excelCategoryVos = BeanCopyUtils.copyBeanList(categoryVos, ExcelCategoryVo.class);
 //            String fileName = "C:\\Users\\古井枯塘\\Desktop\\分类数据.xlsx";
-            System.out.println(JSON.toJSONString(excelCategoryVos));
+//            System.out.println(JSON.toJSONString(excelCategoryVos));
             //把数据写入到Excel中,后台以流的形式写到客户端
             EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("模板")
                     .doWrite(excelCategoryVos);
 
 //            EasyExcel.write(response.getOutputStream(), ExcelCategoryVo.class).sheet("分类导出").doWrite(excelCategoryVos);
-            System.out.println("导出成功");
+            log.info("导出成功");
 //            // 使用Apache POI库创建工作簿和工作表，并将数据写入Excel  
 //            Workbook workbook = new XSSFWorkbook(); // 新建工作簿  
 //            Sheet sheet = workbook.createSheet("分类数据"); // 创建工作表  
