@@ -138,6 +138,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if(category!=null){
             articleDetailVo.setCategoryName(category.getName());
         }
+        // 文章创建人
+        articleDetailVo.setCreateName(userService.getById(article.getCreateBy()).getNickName());
         //封装响应返回
         return ResponseResult.okResult(articleDetailVo);
     }

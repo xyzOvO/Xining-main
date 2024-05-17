@@ -41,4 +41,7 @@ public class ArticleDetailVo {
     @ApiModelProperty(notes = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(notes = "创建人")
+    private String createName;
+
 }
