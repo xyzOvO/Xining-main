@@ -29,5 +29,7 @@ public class ArticleListVo {
 
     private Date createTime;
 
+    //文章创建人
+    private String createName;
 
 }

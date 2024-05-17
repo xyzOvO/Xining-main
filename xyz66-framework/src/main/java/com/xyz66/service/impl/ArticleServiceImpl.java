@@ -1,7 +1,6 @@
 package com.xyz66.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xyz66.constants.SystemConstants;
@@ -17,14 +16,12 @@ import com.xyz66.mapper.ArticleMapper;
 import com.xyz66.service.ArticleService;
 import com.xyz66.service.ArticleTagService;
 import com.xyz66.service.CategoryService;
+import com.xyz66.service.UserService;
 import com.xyz66.utils.BeanCopyUtils;
 import com.xyz66.utils.RedisCache;
-import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -42,6 +39,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Autowired // 这里会产生循环依赖，要单独注入
 //    @Lazy// 懒加载，懒加载的意思是，只有在调用的时候才去初始化，初始化的时候，才会去调用构造方法，初始化的时候，才会去调用set方法
     private CategoryService categoryService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private RedisCache redisCache;
@@ -107,6 +106,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //查询categoryName
         articles.stream()
                 .map(article -> article.setCategoryName(categoryService.getById(article.getCategoryId()).getName()))
+                .collect(Collectors.toList());
+        // 根据createBy 查询用户昵称
+        articles.stream()
+                .map(article -> article.setCreateName(userService.getById(article.getCreateBy()).getNickName()))
                 .collect(Collectors.toList());
         //articleId去查询articleName进行设置
 //        for (Article article : articles) {
